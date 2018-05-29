@@ -1,0 +1,22 @@
+Data model
+
+Image
+  - Created timestamp
+  - Image ID
+  - Image binary
+  - Image filename
+  - Image metadata? (name, etc.)
+  - Image checksum
+
+Selection
+  - Created Timestamp
+  - Image Selection (Pixel list) and label list
+  - Annotation List
+
+Annotation
+  - Timestamp
+  - Label
+  - Selection list
+
+
+

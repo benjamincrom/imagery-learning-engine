@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>slippry demo</title>
+        <title>{{message}}</title>
         <meta name="viewport"
               content="width=device-width">
 
@@ -80,12 +80,17 @@
                 var width = annotation.shapes[0].geometry.width;
                 var height = annotation.shapes[0].geometry.height;
                 var text = annotation.text;
-
                 var xhttp = new XMLHttpRequest();
                 xhttp.open("POST", "http://127.0.0.1:5000/api/annotation", true);
                 xhttp.setRequestHeader("Content-type", "application/json");
-                xhttp.send(JSON.stringify({x:x, y:y, width:width, height:height, text:text}));
-                var response = JSON.parse(xhttp.responseText);
+                xhttp.send(JSON.stringify({filename:filename,
+                                           x:x,
+                                           y:y,
+                                           width:width,
+                                           height:height,
+                                           text:text}));
+                var response = xhttp.responseText;
+                console.log(response);
                 // error--popup modal
             });
 
@@ -100,7 +105,15 @@
                 var xhttp = new XMLHttpRequest();
                 xhttp.open("POST", "http://127.0.0.1:5000/api/delete_annotation", true);
                 xhttp.setRequestHeader("Content-type", "application/json");
-                xhttp.send(JSON.stringify({x:x, y:y, width:width, height:height, text:text}));
+                xhttp.send(
+                    JSON.stringify({filename:filename,
+                                    x:x,
+                                    y:y,
+                                    width:width,
+                                    height:height,
+                                    text:text})
+                );
+
                 var response = JSON.parse(xhttp.responseText);
                 // error--popup modal
             });
@@ -114,7 +127,7 @@
                 var text = annotation.text;
 
                 var xhttp = new XMLHttpRequest();
-                xhttp.open("POST", "http://127.0.0.1:5000/api/update_annotation", true);
+                xhttp.open("POST", "http://127.0.0.1:5000/api/annotation", true);
                 xhttp.setRequestHeader("Content-type", "application/json");
                 xhttp.send(JSON.stringify({x:x, y:y, width:width, height:height, text:text}));
                 var response = JSON.parse(xhttp.responseText);

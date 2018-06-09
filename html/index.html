@@ -74,47 +74,50 @@
         </section>
         <script>
             anno.addHandler('onAnnotationCreated', function(annotation) {
-                let x = annotation.shapes[0].geometry.x;
-                let y = annotation.shapes[0].geometry.y;
-                let width = annotation.shapes[0].geometry.width;
-                let height = annotation.shapes[0].geometry.height;
-                let text = annotation.text;
+                var filename = annotation.src.split(/[/]+/).pop();
+                var x = annotation.shapes[0].geometry.x;
+                var y = annotation.shapes[0].geometry.y;
+                var width = annotation.shapes[0].geometry.width;
+                var height = annotation.shapes[0].geometry.height;
+                var text = annotation.text;
 
-                // var xhttp = new XMLHttpRequest();
-                // xhttp.open("POST", "http://0.0.0.0/api/annotation", true);
-                // xhttp.setRequestHeader("Content-type", "application/json");
-                // xhttp.send(`x=${x}&y=${y}&width=${width}&height=${height}&text=${text}`);
-                // var response = JSON.parse(xhttp.responseText);
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("POST", "http://127.0.0.1:5000/api/annotation", true);
+                xhttp.setRequestHeader("Content-type", "application/json");
+                xhttp.send(JSON.stringify({x:x, y:y, width:width, height:height, text:text}));
+                var response = JSON.parse(xhttp.responseText);
                 // error--popup modal
             });
 
             anno.addHandler('beforeAnnotationRemoved', function(annotation) {
-                let x = annotation.shapes[0].geometry.x;
-                let y = annotation.shapes[0].geometry.y;
-                let width = annotation.shapes[0].geometry.width;
-                let height = annotation.shapes[0].geometry.height;
-                let text = annotation.text;
+                var filename = annotation.src.split(/[/]+/).pop();
+                var x = annotation.shapes[0].geometry.x;
+                var y = annotation.shapes[0].geometry.y;
+                var width = annotation.shapes[0].geometry.width;
+                var height = annotation.shapes[0].geometry.height;
+                var text = annotation.text;
 
-                // var xhttp = new XMLHttpRequest();
-                // xhttp.open("POST", "http://0.0.0.0/api/delete_annotation_query", true);
-                // xhttp.setRequestHeader("Content-type", "application/json");
-                // xhttp.send(`x=${x}&y=${y}&width=${width}&height=${height}&text=${text}`);
-                // var response = JSON.parse(xhttp.responseText);
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("POST", "http://127.0.0.1:5000/api/delete_annotation", true);
+                xhttp.setRequestHeader("Content-type", "application/json");
+                xhttp.send(JSON.stringify({x:x, y:y, width:width, height:height, text:text}));
+                var response = JSON.parse(xhttp.responseText);
                 // error--popup modal
             });
 
             anno.addHandler('onAnnotationUpdated', function(annotation) {
-                let x = annotation.shapes[0].geometry.x;
-                let y = annotation.shapes[0].geometry.y;
-                let width = annotation.shapes[0].geometry.width;
-                let height = annotation.shapes[0].geometry.height;
-                let text = annotation.text;
+                var filename = annotation.src.split(/[/]+/).pop();
+                var x = annotation.shapes[0].geometry.x;
+                var y = annotation.shapes[0].geometry.y;
+                var width = annotation.shapes[0].geometry.width;
+                var height = annotation.shapes[0].geometry.height;
+                var text = annotation.text;
 
-                // var xhttp = new XMLHttpRequest();
-                // xhttp.open("POST", "http://0.0.0.0/api/update_annotation_query", true);
-                // xhttp.setRequestHeader("Content-type", "application/json");
-                // xhttp.send(`x=${x}&y=${y}&width=${width}&height=${height}&text=${text}`);
-                // var response = JSON.parse(xhttp.responseText);
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("POST", "http://127.0.0.1:5000/api/update_annotation", true);
+                xhttp.setRequestHeader("Content-type", "application/json");
+                xhttp.send(JSON.stringify({x:x, y:y, width:width, height:height, text:text}));
+                var response = JSON.parse(xhttp.responseText);
                 // error--popup modal
             });
 

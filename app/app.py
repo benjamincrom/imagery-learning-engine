@@ -69,7 +69,3 @@ def root():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-
-#bills_post = imagery_database.find_one({'author': 'Bill'})
-#print(bills_post)

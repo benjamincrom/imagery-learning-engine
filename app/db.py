@@ -1,4 +1,5 @@
 import datetime
+import os
 
 from flask import Flask, request, render_template
 from flask_restful import reqparse, Api, Resource
@@ -60,8 +61,11 @@ api.add_resource(DeleteImage, '/api/delete_annotation')
 
 @app.route('/')
 def root():
-    message = "Test"
-    return render_template('index.html', message=message)
+    filename_list = os.listdir('app/static/img')
+    annotation_list = [entry for entry in annotation_table.find()]
+    return render_template('index.html',
+                           filename_list=filename_list,
+                           annotation_list=annotation_list)
 
 if __name__ == '__main__':
     app.run(debug=True)

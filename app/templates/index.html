@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>{{message}}</title>
+        <title>Image Annotation Application</title>
         <meta name="viewport"
               content="width=device-width">
 
@@ -34,41 +34,21 @@
                 <input id="checkBox" type="checkbox"> Show annotations from all users
             </p>
             <ul id="thumbnails">
-                <!-- List all images from this project in order -->
-                <li>
-                    <img src="img/image-1.jpg" class="annotatable" width="100%" id="img1">
-                </li>
-                <li>
-                    <img src="img/image-2.jpg" class="annotatable" width="100%" id="img2">
-                </li>
-                <li>
-                    <img src="img/image-4.jpg" class="annotatable" width="100%" id="img3">
-                </li>
-                <li>
-                    <img src="img/set1_01.JPG" class="annotatable" width="100%" id="img4">
-                </li>
-                <li>
-                    <img src="img/set1_02.JPG" class="annotatable" width="100%" id="img5">
-                </li>
-                <li>
-                    <img src="img/set1_03.JPG" class="annotatable" width="100%" id="img6">
-                </li>
-                <li>
-                    <img src="img/set1_04.JPG" class="annotatable" width="100%" id="img7">
-                </li>
-                <!-- End -->
+                {% for filename in filename_list %}
+                    <li>
+                        <img src="img/{{filename}}" class="annotatable" height="600px" id="img{{loop.index}}">
+                    </li>
+                {% endfor %}
             </ul>
             <div class="thumb-box">
                 <ul class="thumbs">
-                    <!-- List all images from this project in order -->
-                    <li><a href="#1" data-slide="1"><img src="img/image-1.jpg"></a></li>
-                    <li><a href="#2" data-slide="2"><img src="img/image-2.jpg"></a></li>
-                    <li><a href="#3" data-slide="3"><img src="img/image-4.jpg"></a></li>
-                    <li><a href="#4" data-slide="4"><img src="img/set1_01.JPG"></a></li>
-                    <li><a href="#5" data-slide="5"><img src="img/set1_02.JPG"></a></li>
-                    <li><a href="#6" data-slide="6"><img src="img/set1_03.JPG"></a></li>
-                    <li><a href="#7" data-slide="7"><img src="img/set1_04.JPG"></a></li>
-                    <!-- End -->
+                    {% for filename in filename_list %}
+                        <li>
+                            <a href="#{{loop.index}}" data-slide="{{loop.index}}">
+                                <img src="img/{{filename}}">
+                            </a>
+                        </li>
+                    {% endfor %}
                 </ul>
             </div>
         </section>
@@ -158,24 +138,18 @@
 
             window.onload = function() {
                 // Load all images in this project in order and their annotations
-                anno.makeAnnotatable(document.getElementById('img1'));
-                var myAnnotation = {
-                    src : 'img/image-1.jpg',
-                    text : 'My annotation',
-                    shapes : [{
-                        type : 'rect',
-                        geometry : { x : 0.1, y: 0.1, width : 0.4, height: 0.3 }
-                    }]
-                }
-                anno.addAnnotation(myAnnotation)
-
-                anno.makeAnnotatable(document.getElementById('img2'));
-                anno.makeAnnotatable(document.getElementById('img3'));
-                anno.makeAnnotatable(document.getElementById('img4'));
-                anno.makeAnnotatable(document.getElementById('img5'));
-                anno.makeAnnotatable(document.getElementById('img6'));
-                anno.makeAnnotatable(document.getElementById('img7'));
-                // End
+                {% for filename in filename_list %}
+                    anno.makeAnnotatable(document.getElementById('img{{loop.index}}'));
+                    // var myAnnotation = {
+                    //     src : 'img/image-1.jpg',
+                    //     text : 'My annotation',
+                    //     shapes : [{
+                    //         type : 'rect',
+                    //         geometry : { x : 0.1, y: 0.1, width : 0.4, height: 0.3 }
+                    //     }]
+                    // }
+                    // anno.addAnnotation(myAnnotation)
+                {% endfor %}
             }
         </script>
     </body>

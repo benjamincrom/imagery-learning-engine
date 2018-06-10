@@ -36,7 +36,7 @@
             <ul id="thumbnails">
                 {% for filename in filename_list %}
                     <li>
-                        <img src="img/{{filename}}" class="annotatable" width="90%" id="img{{loop.index}}">
+                        <img src="img/{{filename}}" class="annotatable" width="100%" id="img{{loop.index}}">
                     </li>
                 {% endfor %}
             </ul>
@@ -140,15 +140,18 @@
                 // Load all images in this project in order and their annotations
                 {% for filename in filename_list %}
                     anno.makeAnnotatable(document.getElementById('img{{loop.index}}'));
-                    // var myAnnotation = {
-                    //     src : 'img/image-1.jpg',
-                    //     text : 'My annotation',
-                    //     shapes : [{
-                    //         type : 'rect',
-                    //         geometry : { x : 0.1, y: 0.1, width : 0.4, height: 0.3 }
-                    //     }]
-                    // }
-                    // anno.addAnnotation(myAnnotation)
+                {% endfor %}
+                {% for annotation in annotation_list %}
+                    anno.addAnnotation(
+                        {
+                            src : 'img/{{annotation["filename"]}}',
+                            text : '{{annotation["text"]}}',
+                            shapes : [{
+                                type : 'rect',
+                                geometry : { x : {{annotation["x"]}}, y: {{annotation["y"]}}, width : {{annotation["width"]}}, height: {{annotation["height"]}} }
+                            }]
+                        }
+                    );
                 {% endfor %}
             }
         </script>

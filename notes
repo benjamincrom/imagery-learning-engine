@@ -1,0 +1,17 @@
+- User registration & login (Flask? Django?)
+
+- Collection creation page
+  - upload images
+  - remove images
+  - deactivate image
+  - activate image
+
+- User annotation page
+  - free select
+
+- Apply algorithm to dataset
+- Export data
+
+- iPad app
+- Android app
+
